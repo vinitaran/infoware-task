@@ -7,7 +7,7 @@ const Subtotal = () => {
     const deliveryCharges = 1.000;
     const totalValue=useSelector(selectCartValue);
     const totalValueFinal=totalValue.toPrecision(4);
-    let total = (parseFloat(deliveryCharges) + parseFloat(totalValueFinal)).toPrecision(5);
+    let total = (parseFloat(deliveryCharges) + parseFloat(totalValueFinal)).toPrecision(4);
     return (
         <div className="subtotal">
             <div className="cart_total">

@@ -7,17 +7,15 @@ export const appSlice=createSlice({
     },
     reducers:{
         setCartTotal:(state,action)=>{
-
-            console.log("The reducer is getting called");
-            console.log(`I am the passed value${action.payload.itemValue}`);
-            console.log(`I am the previous value${state.cartTotal}`);
             state.cartTotal+=action.payload.itemValue;
-            console.log(`Like is this right? ${state.cartTotal}`);
         },
+        decCartTotal:(state,action)=>{
+            state.cartTotal-=action.payload.itemValue;
+        }
     },
 });
 
-export const {setCartTotal}=appSlice.actions;
+export const {setCartTotal, decCartTotal}=appSlice.actions;
 
 export const selectCartValue=(state)=>state.app.cartTotal;
 

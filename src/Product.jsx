@@ -4,7 +4,7 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {useDispatch} from "react-redux";
-import {setCartTotal} from "./features/appSlice";
+import {setCartTotal, decCartTotal} from "./features/appSlice";
 
 const Product = ({title, calorie, price, src}) => {
     const [num, setNum] = useState(1);
@@ -13,22 +13,21 @@ const Product = ({title, calorie, price, src}) => {
        dispatch(setCartTotal({
         itemValue:price,
        }));
-    }, [num])
-    
-
-    
+    }, [])
 
     const incNum = () => {
         setNum(num+1);
-        // console.log(price)
-        // dispatch(setCartTotal({
-        //     itemValue:price,
-        //    }));
+        dispatch(setCartTotal({
+            itemValue:price,
+           }));
     }
 
     const decNum = () => {
         if(num>0){
             setNum(num-1);
+            dispatch(decCartTotal({
+                itemValue:price,
+               }));
         }else{
             setNum(0);
         }
