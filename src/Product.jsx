@@ -8,28 +8,34 @@ import {setCartTotal, decCartTotal} from "./features/appSlice";
 
 const Product = ({title, calorie, price, src}) => {
     const [num, setNum] = useState(1);
+    const [fnType,setFnType]=useState("increment");
     const dispatch=useDispatch();
     useEffect(() => {
-       dispatch(setCartTotal({
-        itemValue:price,
-       }));
-    }, [])
+        if(fnType === "increment"){
+            dispatch(setCartTotal({
+                itemValue:parseFloat(price),
+               }));
+        }
+        else if(fnType === "decrement"){
+            dispatch(decCartTotal({
+                itemValue:parseFloat(price),
+               }));
+        }
+        else{
+            console.log("Something went wrong");
+        }
+      
+    }, [num])
 
     const incNum = () => {
+        setFnType("increment");
         setNum(num+1);
-        dispatch(setCartTotal({
-            itemValue:price,
-           }));
-    }
+   }
 
     const decNum = () => {
         if(num>0){
-            setNum(num-1);
-            dispatch(decCartTotal({
-                itemValue:price,
-               }));
-        }else{
-            setNum(0);
+            setFnType("decrement");
+            setNum(num-1);            
         }
     }
 
@@ -51,7 +57,7 @@ const Product = ({title, calorie, price, src}) => {
                     </div>
                     <div className="product_count">
                         <div className="counter">
-                            <RemoveIcon className="remove_icon" onClick={decNum}/>
+                            <RemoveIcon className="remove_icon" onClick={()=>decNum()}/>
                             <div className="count_div">
                                 <span className="count"><h4>{num}</h4></span>
                             </div>
